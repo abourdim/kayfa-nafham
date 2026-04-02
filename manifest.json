@@ -1,0 +1,12 @@
+{
+  "name": "How We Understand Islam — كيف نفهم الإسلام",
+  "short_name": "كيف نفهم الإسلام",
+  "description": "Interactive trilingual app based on Sheikh Mohammed al-Ghazali's book",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#E3F2FD",
+  "theme_color": "#0277BD",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": []
+}
