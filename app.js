@@ -533,7 +533,7 @@ function renderHome() {
   const badgeHTML = badges.length > 0 ? `<div class="badges-row">${BADGES.filter(b=>badges.includes(b.id)).map(b=>`<span class="badge-item" title="${b[lang]}">${b.emoji}</span>`).join('')}</div>` : '';
   const modeBtn = `<button class="age-toggle" onclick="toggleAgeMode()">${ageMode==='young'?t.youngMode:t.teenMode}</button>`;
 
-  document.getElementById('dailyCard').innerHTML = `
+  (document.getElementById('dailyCard')||{}).innerHTML= `
     ${xpBar}${badgeHTML}${modeBtn}
     <div class="daily-label">${t.dailyLabel}</div>
     <div class="daily-title">${cd.title}</div>
@@ -547,7 +547,7 @@ function renderHome() {
     {icon:'🗺️',tab:'explorer',title:t.tabExplorer,desc:lang==='ar'?'رحلة عبر الفصول':lang==='fr'?'Voyage à travers les chapitres':'Journey through chapters'},
     {icon:'📖',tab:'about',title:t.tabAbout,desc:lang==='ar'?'عن الكتاب والمؤلف':lang==='fr'?'Le livre et l\'auteur':'Book & author'},
   ];
-  document.getElementById('homeGrid').innerHTML = sections.map(s => `
+  (document.getElementById('homeGrid')||{}).innerHTML= sections.map(s => `
     <div class="home-card" onclick="document.querySelector('[data-tab=${s.tab}]').click()">
       <span class="hc-icon">${s.icon}</span>
       <div class="hc-title">${s.title}</div>
@@ -589,7 +589,7 @@ function renderConcepts() {
       </div>
     </div>`;
   }).join('');
-  document.getElementById('conceptsContainer').innerHTML = searchBar + cards;
+  (document.getElementById('conceptsContainer')||{}).innerHTML= searchBar + cards;
 }
 
 function filterConcepts(query) {
@@ -616,7 +616,7 @@ async function shareConcept(idx) {
 
 // ═══════════════ RENDER: PRINCIPLES ═══════════════
 function renderPrinciples() {
-  document.getElementById('principlesContainer').innerHTML = PRINCIPLES_DATA.map(p => {
+  (document.getElementById('principlesContainer')||{}).innerHTML= PRINCIPLES_DATA.map(p => {
     const d = p[lang];
     return `
     <div class="about-card principle-item scroll-reveal">
@@ -631,7 +631,7 @@ function renderPrinciples() {
 function renderQuiz() {
   const t = T[lang];
   if (!quizState.active) {
-    document.getElementById('quizContainer').innerHTML = `
+    (document.getElementById('quizContainer')||{}).innerHTML= `
       <div class="quiz-intro">
         <div class="quiz-intro-icon">🏆</div>
         <p class="quiz-intro-text">${t.quizDesc}</p>
@@ -672,7 +672,7 @@ function renderQuizQuestion() {
     </div>`;
   const answersHTML = q.a.map((a, i) => `<button class="quiz-answer" id="qa-${i}" onclick="answerQuiz(${i})">${a}</button>`).join('');
 
-  document.getElementById('quizContainer').innerHTML = `
+  (document.getElementById('quizContainer')||{}).innerHTML= `
     <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${(quizState.current/qs.length)*100}%"></div></div>
     <div class="quiz-progress-text">${progress}</div>
     <div class="quiz-score-display">${t.quizScore}: ${quizState.score}</div>
@@ -723,7 +723,7 @@ function finishQuiz() {
   else if (pct >= 50) { emoji = '📚'; title = lang==='ar'?'جيد — واصل التعلم':lang==='fr'?'Bien — continuez à apprendre':'Good — keep learning'; }
   else { emoji = '🌱'; title = lang==='ar'?'بداية طيبة — أعد المحاولة':lang==='fr'?'Bon début — réessayez':'Good start — try again'; }
 
-  document.getElementById('quizContainer').innerHTML = `
+  (document.getElementById('quizContainer')||{}).innerHTML= `
     <div class="quiz-result">
       <div class="qr-emoji">${emoji}</div>
       <div class="qr-score">${quizState.score}/${total} (${pct}%)</div>
@@ -775,7 +775,7 @@ function useSheikh() {
 
 // ═══════════════ RENDER: EXPLORER ═══════════════
 function renderExplorer() {
-  document.getElementById('explorerContainer').innerHTML = CHAPTERS.map(ch => {
+  (document.getElementById('explorerContainer')||{}).innerHTML= CHAPTERS.map(ch => {
     const d = ch[lang];
     return `
     <div class="about-card explorer-card scroll-reveal">
@@ -828,7 +828,7 @@ function renderAbout() {
     }
   };
   const a = about[lang];
-  document.getElementById('aboutContainer').innerHTML = `
+  (document.getElementById('aboutContainer')||{}).innerHTML= `
     <div class="about-card about-disclaimer">
       <div class="about-disclaimer-title">${a.disclaimerTitle}</div>
       <p>${a.disclaimer}</p>
@@ -883,7 +883,7 @@ function renderHelp() {
       {title:'🤝 Contribuer',body:'GitHub : github.com/abourdim/kayfa-nafham'},
     ]
   };
-  document.getElementById('helpBody').innerHTML = help[lang].map(h => `
+  (document.getElementById('helpBody')||{}).innerHTML= help[lang].map(h => `
     <div class="help-item">
       <div class="help-item-title">${h.title}</div>
       <div>${h.body}</div>
@@ -893,7 +893,7 @@ function renderHelp() {
 
 // ═══════════════ RENDER: DUAS ═══════════════
 function renderDuas() {
-  document.getElementById('duaPanelContent').innerHTML = DUAS.map(d => {
+  (document.getElementById('duaPanelContent')||{}).innerHTML= DUAS.map(d => {
     const dd = d[lang];
     return `
     <div class="dua-item">
