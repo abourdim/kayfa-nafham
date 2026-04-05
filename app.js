@@ -435,7 +435,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function initSplash() {
   let count = 5;
   const el = document.getElementById('splashCount');
+  if (!el) return;
   const featuresEl = document.getElementById('splashFeatures');
+  if (!featuresEl) return;
   if (featuresEl) {
     featuresEl.innerHTML = T[lang].splashFeatures.map((f, i) =>
       `<div class="splash-feature" style="animation-delay:${0.3 + i * 0.3}s">${f}</div>`
@@ -449,6 +451,7 @@ function initSplash() {
 }
 function dismissSplash() {
   const s = document.getElementById('splash');
+  if (!s) return;
   if (s) { s.classList.add('hidden'); setTimeout(() => s.style.display = 'none', 500); }
   playSound('click');
 }
@@ -474,6 +477,7 @@ function setLang(l) {
   set('helpTitle', t.helpTitle); set('duaPanelTitle', t.duaPanelTitle);
   renderHome(); renderConcepts(); renderPrinciples(); renderQuiz(); renderExplorer(); renderAbout(); renderHelp(); renderDuas();
   const featuresEl = document.getElementById('splashFeatures');
+  if (!featuresEl) return;
   if (featuresEl) {
     featuresEl.innerHTML = T[l].splashFeatures.map((f, i) =>
       `<div class="splash-feature" style="animation-delay:${0.3 + i * 0.3}s">${f}</div>`
@@ -488,6 +492,7 @@ function setTheme(t) {
   localStorage.setItem('kn-theme', t);
   const idx = themes.indexOf(t);
   const el = document.getElementById('themeIcon');
+  if (!el) return;
   if (el) el.textContent = themeIcons[idx];
 }
 function cycleTheme() {
@@ -767,6 +772,7 @@ function useSheikh() {
   quizState.lifelines.sheikh = false;
   const q = quizState.questions[quizState.current][lang];
   const hintBox = document.getElementById('quizHintBox');
+  if (!hintBox) return;
   if (hintBox) { hintBox.textContent = '📞 ' + q.hint; hintBox.classList.remove('hidden'); }
   document.querySelectorAll('.lifeline-btn')[2].classList.add('used');
   document.querySelectorAll('.lifeline-btn')[2].disabled = true;
@@ -944,13 +950,16 @@ function initKeyboardNav() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       const helpPanel = document.getElementById('helpPanel');
+      if (!helpPanel) return;
       if (!helpPanel.classList.contains('hidden')) { toggleHelp(); return; }
       const duaPanel = document.getElementById('duaPanel');
+      if (!duaPanel) return;
       if (!duaPanel.classList.contains('hidden')) { toggleDuaPanel(); return; }
       document.querySelectorAll('.concept-card.open').forEach(c => c.classList.remove('open'));
     }
     if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
       const conceptsPanel = document.getElementById('panel-concepts');
+      if (!conceptsPanel) return;
       if (!conceptsPanel || !conceptsPanel.classList.contains('active')) return;
       if (document.activeElement && document.activeElement.id === 'conceptsSearch') return;
       e.preventDefault();
@@ -975,11 +984,14 @@ function toggleHelp() { document.getElementById('helpPanel').classList.toggle('h
 function toggleDuaPanel() { document.getElementById('duaPanel').classList.toggle('hidden'); playSound('click'); }
 function showToast(msg) {
   const t = document.getElementById('toast');
+  if (!t) return;
   const m = document.getElementById('toastMsg');
+  if (!m) return;
   if (t && m) { m.textContent = msg; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 2500); }
 }
 function initScrollTop() {
   const btn = document.getElementById('scrollTop');
+  if (!btn) return;
   window.addEventListener('scroll', () => { if (btn) btn.classList.toggle('visible', window.scrollY > 300); });
 }
 
